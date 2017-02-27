@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (c) 2007-2017 ShareX Team
+    Copyright (C) 2007-2014 ShareX Developers
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -23,23 +23,24 @@
 
 #endregion License Information (GPL v3)
 
-using ShareX.HelpersLib;
+using HelpersLib;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace ShareX.ScreenCaptureLib
+namespace ScreenCaptureLib
 {
-    public partial class Screenshot
+    public static partial class Screenshot
     {
-        public bool CaptureCursor { get; set; } = false;
-        public bool CaptureClientArea { get; set; } = false;
-        public bool RemoveOutsideScreenArea { get; set; } = true;
-        public bool CaptureShadow { get; set; } = false;
-        public int ShadowOffset { get; set; } = 20;
-        public bool AutoHideTaskbar { get; set; } = false;
+        public static bool RemoveOutsideScreenArea = true;
+        public static bool CaptureCursor = false;
+        public static bool CaptureClientArea = false;
+        public static bool CaptureShadow = true;
+        public static int ShadowOffset = 20;
+        public static bool AutoHideTaskbar = false;
 
-        public Image CaptureRectangle(Rectangle rect)
+
+        public static Image CaptureRectangle(Rectangle rect)
         {
             if (RemoveOutsideScreenArea)
             {
@@ -50,14 +51,14 @@ namespace ShareX.ScreenCaptureLib
             return CaptureRectangleNative(rect, CaptureCursor);
         }
 
-        public Image CaptureFullscreen()
+        public static Image CaptureFullscreen()
         {
             Rectangle bounds = CaptureHelpers.GetScreenBounds();
 
             return CaptureRectangle(bounds);
         }
 
-        public Image CaptureWindow(IntPtr handle)
+        public static Image CaptureWindow(IntPtr handle)
         {
             if (handle.ToInt32() > 0)
             {
@@ -95,26 +96,26 @@ namespace ShareX.ScreenCaptureLib
             return null;
         }
 
-        public Image CaptureActiveWindow()
+        public static Image CaptureActiveWindow()
         {
             IntPtr handle = NativeMethods.GetForegroundWindow();
 
             return CaptureWindow(handle);
         }
 
-        public Image CaptureActiveMonitor()
+        public static Image CaptureActiveMonitor()
         {
             Rectangle bounds = CaptureHelpers.GetActiveScreenBounds();
 
             return CaptureRectangle(bounds);
         }
 
-        private Image CaptureRectangleNative(Rectangle rect, bool captureCursor = false)
+        public static Image CaptureRectangleNative(Rectangle rect, bool captureCursor = false)
         {
             return CaptureRectangleNative(NativeMethods.GetDesktopWindow(), rect, captureCursor);
         }
 
-        private Image CaptureRectangleNative(IntPtr handle, Rectangle rect, bool captureCursor = false)
+        public static Image CaptureRectangleNative(IntPtr handle, Rectangle rect, bool captureCursor = false)
         {
             if (rect.Width == 0 || rect.Height == 0)
             {
@@ -153,7 +154,7 @@ namespace ShareX.ScreenCaptureLib
             return img;
         }
 
-        private Image CaptureRectangleManaged(Rectangle rect)
+        public static Image CaptureRectangleManaged(Rectangle rect)
         {
             if (rect.Width == 0 || rect.Height == 0)
             {
