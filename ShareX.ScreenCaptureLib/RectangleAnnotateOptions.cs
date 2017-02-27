@@ -2,7 +2,7 @@
 
 /*
     ShareX - A program that allows you to take screenshots and share any file type
-    Copyright (C) 2007-2014 ShareX Developers
+    Copyright (c) 2007-2017 ShareX Team
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -23,26 +23,26 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
+using ShareX.HelpersLib;
 using System.ComponentModel;
 using System.Drawing;
 
-namespace ScreenCaptureLib
+namespace ShareX.ScreenCaptureLib
 {
     public class RectangleAnnotateOptions
     {
-        [DefaultValue(false), Description("Show position and size of selected rectangle area.")]
-        public bool ShowRectangleInfo { get; set; }
+        [DefaultValue(true), Description("Show cursor position and region size.")]
+        public bool ShowInfo { get; set; }
 
         [DefaultValue(true), Description("Show hotkey tips.")]
         public bool ShowTips { get; set; }
 
-        [DefaultValue(typeof(Color), "0, 230, 0"), Description("In drawing mode color of pen.")]
+        [DefaultValue(typeof(Color), "255, 0, 0"), Description("Color of pen and rectangle border.")]
         public Color DrawingPenColor { get; set; }
 
         private int drawingPenSize;
 
-        [DefaultValue(7), Description("In drawing mode size of pen.")]
+        [DefaultValue(5), Description("Size of pen.")]
         public int DrawingPenSize
         {
             get
@@ -54,6 +54,24 @@ namespace ScreenCaptureLib
                 drawingPenSize = value.Between(1, 100);
             }
         }
+
+        private int drawingRectangleBorderSize;
+
+        [DefaultValue(2), Description("Size of rectangle border.")]
+        public int DrawingRectangleBorderSize
+        {
+            get
+            {
+                return drawingRectangleBorderSize;
+            }
+            set
+            {
+                drawingRectangleBorderSize = value.Between(1, 100);
+            }
+        }
+
+        [DefaultValue(true), Description("Draw shadow around rectangle.")]
+        public bool DrawingRectangleShadow { get; set; }
 
         public RectangleAnnotateOptions()
         {
