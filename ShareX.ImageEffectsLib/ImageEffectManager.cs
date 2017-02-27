@@ -35,19 +35,10 @@ namespace ShareX.ImageEffectsLib
         public static Image ApplyEffects(Image img, List<ImageEffect> imageEffects)
         {
             Image result = (Image)img.Clone();
-            ((Bitmap)result).SetResolution(96f, 96f);
-
-            if (imageEffects != null && imageEffects.Count > 0)
+            
+            if(imageEffects != null && imageEffects.Count > 0)
             {
-                foreach (ImageEffect imageEffect in imageEffects.Where(x => x.Enabled))
-                {
-                    result = imageEffect.Apply(result);
-
-                    if (result == null)
-                    {
-                        break;
-                    }
-                }
+                result = imageEffects.Aggregate(result, (current, imageEffect) => imageEffect.Apply(current));
             }
 
             return result;
