@@ -24,40 +24,34 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using System.ComponentModel;
 using System.Drawing;
 
 namespace ScreenCaptureLib
 {
-    public class RectangleAnnotateOptions
+    public class AVICache : ImageCache
     {
-        [DefaultValue(false), Description("Show position and size of selected rectangle area.")]
-        public bool ShowRectangleInfo { get; set; }
+        private AVIWriter aviWriter;
 
-        [DefaultValue(true), Description("Show hotkey tips.")]
-        public bool ShowTips { get; set; }
-
-        [DefaultValue(typeof(Color), "0, 230, 0"), Description("In drawing mode color of pen.")]
-        public Color DrawingPenColor { get; set; }
-
-        private int drawingPenSize;
-
-        [DefaultValue(7), Description("In drawing mode size of pen.")]
-        public int DrawingPenSize
+        public AVICache(ScreencastOptions options)
         {
-            get
-            {
-                return drawingPenSize;
-            }
-            set
-            {
-                drawingPenSize = value.Between(1, 100);
-            }
+            Options = options;
+            Helpers.CreateDirectoryIfNotExist(Options.OutputPath);
+            aviWriter = new AVIWriter(options);
         }
 
-        public RectangleAnnotateOptions()
+        protected override void WriteFrame(Image img)
         {
-            this.ApplyDefaultPropertyValues();
+            aviWriter.AddFrame((Bitmap)img);
+        }
+
+        public override void Dispose()
+        {
+            if (aviWriter != null)
+            {
+                aviWriter.Dispose();
+            }
+
+            base.Dispose();
         }
     }
 }

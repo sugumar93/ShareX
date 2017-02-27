@@ -24,40 +24,42 @@
 #endregion License Information (GPL v3)
 
 using HelpersLib;
-using System.ComponentModel;
+using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace ScreenCaptureLib
 {
-    public class RectangleAnnotateOptions
+    public class RoundedRectangleRegion : RectangleRegion
     {
-        [DefaultValue(false), Description("Show position and size of selected rectangle area.")]
-        public bool ShowRectangleInfo { get; set; }
+        public float Radius { get; set; }
+        public int RadiusIncrement { get; set; }
 
-        [DefaultValue(true), Description("Show hotkey tips.")]
-        public bool ShowTips { get; set; }
-
-        [DefaultValue(typeof(Color), "0, 230, 0"), Description("In drawing mode color of pen.")]
-        public Color DrawingPenColor { get; set; }
-
-        private int drawingPenSize;
-
-        [DefaultValue(7), Description("In drawing mode size of pen.")]
-        public int DrawingPenSize
+        public RoundedRectangleRegion(Image backgroundImage = null)
+            : base(backgroundImage)
         {
-            get
+            Radius = 25;
+            RadiusIncrement = 3;
+
+            KeyDown += RoundedRectangleRegion_KeyDown;
+        }
+
+        private void RoundedRectangleRegion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Add)
             {
-                return drawingPenSize;
+                Radius += RadiusIncrement;
             }
-            set
+            else if (e.KeyData == Keys.Subtract)
             {
-                drawingPenSize = value.Between(1, 100);
+                Radius = Math.Max(0, Radius - RadiusIncrement);
             }
         }
 
-        public RectangleAnnotateOptions()
+        protected override void AddShapePath(GraphicsPath graphicsPath, Rectangle rect)
         {
-            this.ApplyDefaultPropertyValues();
+            graphicsPath.AddRoundedRectangle(rect, Radius);
         }
     }
 }

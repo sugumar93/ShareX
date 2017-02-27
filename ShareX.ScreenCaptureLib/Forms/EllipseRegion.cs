@@ -23,41 +23,21 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
-using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace ScreenCaptureLib
 {
-    public class RectangleAnnotateOptions
+    public class EllipseRegion : RectangleRegion
     {
-        [DefaultValue(false), Description("Show position and size of selected rectangle area.")]
-        public bool ShowRectangleInfo { get; set; }
-
-        [DefaultValue(true), Description("Show hotkey tips.")]
-        public bool ShowTips { get; set; }
-
-        [DefaultValue(typeof(Color), "0, 230, 0"), Description("In drawing mode color of pen.")]
-        public Color DrawingPenColor { get; set; }
-
-        private int drawingPenSize;
-
-        [DefaultValue(7), Description("In drawing mode size of pen.")]
-        public int DrawingPenSize
+        public EllipseRegion(Image backgroundImage = null)
+            : base(backgroundImage)
         {
-            get
-            {
-                return drawingPenSize;
-            }
-            set
-            {
-                drawingPenSize = value.Between(1, 100);
-            }
         }
 
-        public RectangleAnnotateOptions()
+        protected override void AddShapePath(GraphicsPath graphicsPath, Rectangle rect)
         {
-            this.ApplyDefaultPropertyValues();
+            graphicsPath.AddEllipse(rect);
         }
     }
 }

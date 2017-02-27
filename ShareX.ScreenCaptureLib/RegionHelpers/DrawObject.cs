@@ -23,41 +23,38 @@
 
 #endregion License Information (GPL v3)
 
-using HelpersLib;
-using System.ComponentModel;
 using System.Drawing;
 
 namespace ScreenCaptureLib
 {
-    public class RectangleAnnotateOptions
+    public class DrawableObject
     {
-        [DefaultValue(false), Description("Show position and size of selected rectangle area.")]
-        public bool ShowRectangleInfo { get; set; }
+        public bool Visible { get; set; }
+        public RectangleF Rectangle { get; set; }
+        public bool IsMouseHover { get; set; }
+        public bool IsDragging { get; set; }
+        public int Order { get; set; }
 
-        [DefaultValue(true), Description("Show hotkey tips.")]
-        public bool ShowTips { get; set; }
-
-        [DefaultValue(typeof(Color), "0, 230, 0"), Description("In drawing mode color of pen.")]
-        public Color DrawingPenColor { get; set; }
-
-        private int drawingPenSize;
-
-        [DefaultValue(7), Description("In drawing mode size of pen.")]
-        public int DrawingPenSize
+        public void Show()
         {
-            get
-            {
-                return drawingPenSize;
-            }
-            set
-            {
-                drawingPenSize = value.Between(1, 100);
-            }
+            Visible = true;
         }
 
-        public RectangleAnnotateOptions()
+        public void Hide()
         {
-            this.ApplyDefaultPropertyValues();
+            Visible = false;
+        }
+
+        public virtual void Draw(Graphics g)
+        {
+            if (IsMouseHover)
+            {
+                g.FillRectangle(Brushes.Green, Rectangle);
+            }
+            else
+            {
+                g.FillRectangle(Brushes.Red, Rectangle);
+            }
         }
     }
 }
