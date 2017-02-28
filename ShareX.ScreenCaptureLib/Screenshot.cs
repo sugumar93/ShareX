@@ -33,11 +33,11 @@ namespace ShareX.ScreenCaptureLib
     public partial class Screenshot
     {
         public bool CaptureCursor { get; set; } = false;
-        public bool CaptureClientArea { get; set; } = false;
-        public bool RemoveOutsideScreenArea { get; set; } = true;
+        public static bool CaptureClientArea { get; set; } = false;
+        public static bool RemoveOutsideScreenArea { get; set; } = true;
         public bool CaptureShadow { get; set; } = false;
         public int ShadowOffset { get; set; } = 20;
-        public bool AutoHideTaskbar { get; set; } = false;
+        public static bool AutoHideTaskbar { get; set; } = false;
 
         public Image CaptureRectangle(Rectangle rect)
         {

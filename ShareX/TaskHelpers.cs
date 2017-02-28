@@ -1365,11 +1365,11 @@ namespace ShareX
             Screenshot screenshot = new Screenshot()
             {
                 CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
-                CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
-                RemoveOutsideScreenArea = true,
+                //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
+                //RemoveOutsideScreenArea = true,
                 CaptureShadow = taskSettings.CaptureSettings.CaptureShadow,
                 ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset,
-                AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
+                //AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
             };
 
             return screenshot;
