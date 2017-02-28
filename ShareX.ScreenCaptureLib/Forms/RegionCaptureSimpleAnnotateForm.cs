@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ScreenCaptureLib;
 using ShareX.HelpersLib;
 using ShareX.ScreenCaptureLib.Properties;
 using System;
@@ -75,7 +76,7 @@ namespace ShareX.ScreenCaptureLib
         {
             Options = options;
 
-            backgroundImage = screenshot.CaptureFullscreen();
+            backgroundImage = new CaptureFullScreen().Screenshot();
             borderDotPen = new Pen(Color.Black, 1);
             borderDotPen2 = new Pen(Color.White, 1);
             borderDotPen2.DashPattern = new float[] { 5, 5 };
