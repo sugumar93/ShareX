@@ -801,7 +801,7 @@ namespace ShareX
 
         private void btnShowImagePrintSettings_Click(object sender, EventArgs e)
         {
-            using (Image testImage = TaskHelpers.GetScreenshot().CaptureActiveMonitor())
+            using (Image testImage = TaskHelpers.GetMonitor().Screenshot())
             using (PrintForm printForm = new PrintForm(testImage, Program.Settings.PrintSettings, true))
             {
                 printForm.ShowDialog();

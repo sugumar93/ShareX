@@ -109,7 +109,7 @@ namespace ShareX
             {
                 TaskSettings taskSettings = TaskSettings.GetDefaultTaskSettings();
 
-                Image img = TaskHelpers.GetScreenshot(taskSettings).CaptureRectangle(rect);
+                Image img = TaskHelpers.GetRectangle(taskSettings).Screenshot();
 
                 if (img != null)
                 {

@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ScreenCaptureLib;
 using ShareX.HelpersLib;
 using ShareX.ScreenCaptureLib.Properties;
 using System;
@@ -157,13 +158,13 @@ namespace ShareX.ScreenCaptureLib
             }
         }
 
-        public Image GetAreaImage(Screenshot screenshot)
+        public Image GetAreaImage(CaptureRectangle screenshot)
         {
             Rectangle rect = SelectionRectangle0Based;
 
             if (rect.Width > 0 && rect.Height > 0)
             {
-                return screenshot.CaptureRectangle(SelectionRectangle);
+                return screenshot.Screenshot();
             }
 
             return null;

@@ -57,7 +57,7 @@ namespace ShareX.ScreenCaptureLib
         private bool isMouseDown;
         private Stopwatch penTimer;
 
-        public RegionCaptureLightForm(Screenshot screenshot)
+        public RegionCaptureLightForm(CaptureRectangle screenshot)
         {
             backgroundImage = new CaptureFullScreen().Screenshot();
             backgroundBrush = new TextureBrush(backgroundImage);

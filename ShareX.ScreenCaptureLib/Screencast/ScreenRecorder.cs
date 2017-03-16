@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ScreenCaptureLib;
 using ShareX.HelpersLib;
 using System;
 using System.Diagnostics;
@@ -96,13 +97,13 @@ namespace ShareX.ScreenCaptureLib
 
         private int fps, delay, frameCount, previousProgress;
         private float durationSeconds;
-        private Screenshot screenshot;
+        private CaptureFullScreen screenshot;
         private Rectangle captureRectangle;
         private ImageCache imgCache;
         private FFmpegHelper ffmpegCli;
         private bool stopRequest;
 
-        public ScreenRecorder(ScreenRecordOutput outputType, ScreencastOptions options, Screenshot screenshot, Rectangle captureRectangle)
+        public ScreenRecorder(ScreenRecordOutput outputType, ScreencastOptions options, CaptureFullScreen screenshot, Rectangle captureRectangle)
         {
             if (string.IsNullOrEmpty(options.OutputPath))
             {
@@ -167,7 +168,7 @@ namespace ShareX.ScreenCaptureLib
                 {
                     Stopwatch timer = Stopwatch.StartNew();
 
-                    Image img = screenshot.CaptureRectangle(CaptureRectangle);
+                    Image img = screenshot.Screenshot(); 
                     //DebugHelper.WriteLine("Screen capture: " + (int)timer.ElapsedMilliseconds);
 
                     imgCache.AddImageAsync(img);

@@ -38,6 +38,11 @@ namespace ScreenCaptureLib
         }
 
         IntPtr ptr;
+
+        public bool CaptureCursor { get; set; }
+        public bool CaptureShadow { get; set; }
+        public int ShadowOffset { get; set; }
+
         public void setPtr(IntPtr p)
         {
             ptr = p;

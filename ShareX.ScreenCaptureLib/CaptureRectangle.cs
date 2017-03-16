@@ -13,6 +13,10 @@ namespace ScreenCaptureLib
         Rectangle rect;
         IntPtr p = new IntPtr(0);
 
+        public bool CaptureCursor { get; set; }
+        public bool CaptureShadow { get; set; }
+        public int ShadowOffset { get; set; }
+
         public CaptureRectangle()
         {
         }

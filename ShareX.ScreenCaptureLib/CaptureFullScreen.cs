@@ -10,6 +10,10 @@ namespace ScreenCaptureLib
     {
         iCaptureType captureType = new TypeFullScreen();
 
+        public bool CaptureCursor { get; set; }
+        public bool CaptureShadow { get; set; }
+        public int ShadowOffset { get; set; }
+
         public void setCaptureType(iCaptureType c)
         {
             captureType = c;

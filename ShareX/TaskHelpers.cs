@@ -28,6 +28,7 @@ using Greenshot.Drawing;
 using Greenshot.IniFile;
 using Greenshot.Plugin;
 using GreenshotPlugin.Core;
+using ScreenCaptureLib;
 using ShareX.HelpersLib;
 using ShareX.HistoryLib;
 using ShareX.ImageEffectsLib;
@@ -1358,11 +1359,11 @@ namespace ShareX
             }
         }
 
-        public static Screenshot GetScreenshot(TaskSettings taskSettings = null)
+        public static CaptureFullScreen GetScreenshot(TaskSettings taskSettings = null)
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
 
-            Screenshot screenshot = new Screenshot()
+            CaptureFullScreen screenshot = new CaptureFullScreen()
             {
                 CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
                 //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
@@ -1374,6 +1375,75 @@ namespace ShareX
 
             return screenshot;
         }
+
+        public static CaptureWindow GetWindow(TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            CaptureWindow screenshot = new CaptureWindow()
+            {
+                CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
+                //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
+                //RemoveOutsideScreenArea = true,
+                CaptureShadow = taskSettings.CaptureSettings.CaptureShadow,
+                ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset,
+                //AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
+            };
+
+            return screenshot;
+        }
+
+        public static CaptureActiveWindow GetActive(TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            CaptureActiveWindow screenshot = new CaptureActiveWindow()
+            {
+                CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
+                //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
+                //RemoveOutsideScreenArea = true,
+                CaptureShadow = taskSettings.CaptureSettings.CaptureShadow,
+                ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset,
+                //AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
+            };
+
+            return screenshot;
+        }
+
+        public static CaptureActiveMonitor GetMonitor(TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            CaptureActiveMonitor screenshot = new CaptureActiveMonitor()
+            {
+                CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
+                //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
+                //RemoveOutsideScreenArea = true,
+                CaptureShadow = taskSettings.CaptureSettings.CaptureShadow,
+                ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset,
+                //AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
+            };
+
+            return screenshot;
+        }
+
+        public static CaptureRectangle GetRectangle(TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            CaptureRectangle screenshot = new CaptureRectangle()
+            {
+                CaptureCursor = taskSettings.CaptureSettings.ShowCursor,
+                //CaptureClientArea = taskSettings.CaptureSettings.CaptureClientArea,
+                //RemoveOutsideScreenArea = true,
+                CaptureShadow = taskSettings.CaptureSettings.CaptureShadow,
+                ShadowOffset = taskSettings.CaptureSettings.CaptureShadowOffset,
+                //AutoHideTaskbar = taskSettings.CaptureSettings.CaptureAutoHideTaskbar
+            };
+
+            return screenshot;
+        }
+
 
         public static void AddCustomUploader(string filePath)
         {

@@ -23,6 +23,7 @@
 
 #endregion License Information (GPL v3)
 
+using ScreenCaptureLib;
 using ShareX.HelpersLib;
 using ShareX.Properties;
 using ShareX.ScreenCaptureLib;
@@ -231,7 +232,7 @@ namespace ShareX
                                 DrawCursor = taskSettings.CaptureSettings.ScreenRecordShowCursor
                             };
 
-                            Screenshot screenshot = TaskHelpers.GetScreenshot(taskSettings);
+                            CaptureFullScreen screenshot = TaskHelpers.GetScreenshot(taskSettings);
                             screenshot.CaptureCursor = taskSettings.CaptureSettings.ScreenRecordShowCursor;
 
                             screenRecorder = new ScreenRecorder(outputType, options, screenshot, captureRectangle);
